@@ -1,6 +1,7 @@
 package quantitymeasurement;
 
 import org.junit.Test;
+import org.junit.Assert;
 
 import static org.junit.Assert.*;
 import static quantitymeasurement.QuantityMeasurementException.ExceptionType.ENTERED_NULL;
@@ -191,5 +192,57 @@ public class QuantityMeasurementTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenTwoValuesOfDifferentTypes_whenEqual_shouldReturnEqual() {
+        try {
+            QuantityMeasurement quantityMeasurement1 = new QuantityMeasurement(0.0, Unit.INCH);
+            QuantityMeasurement quantityMeasurement2 = new QuantityMeasurement(0.0, Unit.CENTIMETER);
+            assertEquals(quantityMeasurement1, quantityMeasurement2);
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenTwoValuesOfDifferentTypes_whenNotEqual_shouldReturnNotEqual() {
+        try {
+            QuantityMeasurement quantityMeasurement1 = new QuantityMeasurement(1.0, Unit.INCH);
+            QuantityMeasurement quantityMeasurement2 = new QuantityMeasurement(1.0, Unit.CENTIMETER);
+            assertNotEquals(quantityMeasurement1, quantityMeasurement2);
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenValuesOfDifferentTypes_whenEqual_shouldReturnEqual() {
+        try {
+            QuantityMeasurement quantityMeasurement1 = new QuantityMeasurement(1.0, Unit.INCH);
+            QuantityMeasurement quantityMeasurement2 = new QuantityMeasurement(2.5, Unit.CENTIMETER);
+            assertEquals(quantityMeasurement1, quantityMeasurement2);
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantitiesYardAndCentimetreValues_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.01, Unit.YARD),new QuantityMeasurement(1.0, Unit.CENTIMETER));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantitiesFootAndCentimetreValues_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.5, Unit.FEET),new QuantityMeasurement(15.0, Unit.CENTIMETER));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
