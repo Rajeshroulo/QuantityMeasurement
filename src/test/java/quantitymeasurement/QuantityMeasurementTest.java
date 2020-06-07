@@ -246,7 +246,8 @@ public class QuantityMeasurementTest {
     @Test
     public void givenQuantitiesFootAndCentimetreValues_whenEqual_shouldReturnTrue() {
         try {
-            assertEquals(new QuantityMeasurement(0.5, Unit.FEET), new QuantityMeasurement(15.0, Unit.CENTIMETER));
+            assertEquals(new QuantityMeasurement(0.5, Unit.FEET),
+                    new QuantityMeasurement(15.0, Unit.CENTIMETER));
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
@@ -297,8 +298,50 @@ public class QuantityMeasurementTest {
 
     @Test
     public void given1FeetAnd2Yard_whenAdded_shouldReturn84inches() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),new QuantityMeasurement(2.0,Unit.YARD));
+        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),
+                new QuantityMeasurement(2.0,Unit.YARD));
         assertEquals(84.0,result,0.0);
     }
+
+    @Test
+    public void givenValuesOflitresAndGallon_whenEqual_ShouldReturnEqual() {
+        try {
+            assertEquals(new QuantityMeasurement(1.0, Unit.GALLON),
+                    new QuantityMeasurement(3.78, Unit.LITRE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenValuesOflitresAndMillilitres_whenEqual_ShouldReturnEqual() {
+        try {
+            assertEquals(new QuantityMeasurement(1.0, Unit.LITRE),
+                    new QuantityMeasurement(1000.0, Unit.MILLILITRE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities0LitreAnd0Gallon_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.0, Unit.LITRE),
+                    new QuantityMeasurement(0.0, Unit.GALLON));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities0LitreAnd0Millilitres_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.0, Unit.LITRE),
+                    new QuantityMeasurement(0.0, Unit.MILLILITRE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
