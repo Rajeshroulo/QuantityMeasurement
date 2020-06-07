@@ -1,7 +1,6 @@
 package quantitymeasurement;
 
 import org.junit.Test;
-import org.junit.Assert;
 import org.junit.Before;
 
 import static org.junit.Assert.*;
@@ -438,6 +437,15 @@ public class QuantityMeasurementTest {
     public void givenQuantities1000GramAnd1Kilogram_whenAdded_shouldReturnResultsInKilogram() {
         double result = quantityMeasurement.add(new QuantityMeasurement(1000.0, Unit.GRAM), new QuantityMeasurement(1.0, Unit.KILOGRAM),Unit.KILOGRAM);
         assertEquals(2, result, 0.0);
+    }
+
+    @Test
+    public void givenQuantitiesOfFahrenheitAndCelcius_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(100.0, Unit.CELCIUS),new QuantityMeasurement(212.0, Unit.FAHRENHEIT));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
     }
 
 }
