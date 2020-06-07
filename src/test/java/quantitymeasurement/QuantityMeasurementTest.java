@@ -343,5 +343,26 @@ public class QuantityMeasurementTest {
         }
     }
 
+    @Test
+    public void given1FeetAnd1Litre_shouldThrowException() {
+        try {
+            quantityMeasurement.add(new QuantityMeasurement(1.0, Unit.FEET), new QuantityMeasurement(1.0, Unit.LITRE));
+        } catch (QuantityMeasurementException e) {
+            assertEquals(QuantityMeasurementException.ExceptionType.INVALID_ADDITION,e.type);
+        }
+    }
+
+    @Test
+    public void given1000MillilitreAnd1Litre_whenAdded_shouldReturn2Litres() {
+        double result = quantityMeasurement.add(new QuantityMeasurement(1000.0,Unit.MILLILITRE),new QuantityMeasurement(1.0,Unit.LITRE));
+        assertEquals(2.0,result,0.0);
+    }
+
+    @Test
+    public void givenGallonAndLitre_whenAdded_shouldReturnCorrectResults() {
+        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.GALLON),new QuantityMeasurement(3.78,Unit.LITRE));
+        assertEquals(7.56,result,0.0);
+    }
+
 
 }
