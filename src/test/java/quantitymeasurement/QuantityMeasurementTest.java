@@ -364,5 +364,58 @@ public class QuantityMeasurementTest {
         assertEquals(7.56,result,0.0);
     }
 
+    @Test
+    public void givenQuantities1000GramsAnd1Kilogram_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(1000.0, Unit.GRAM),new QuantityMeasurement(1.0, Unit.KILOGRAM));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities1000KilogramAnd1Tonne_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(1000.0, Unit.KILOGRAM),new QuantityMeasurement(1.0, Unit.TONNE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities1000000GramAnd1Tonne_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(1000000.0, Unit.GRAM),new QuantityMeasurement(1.0, Unit.TONNE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities0KilogramAnd0Tonne_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.0, Unit.KILOGRAM),new QuantityMeasurement(0.0, Unit.TONNE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities1KilogramAnd1Tonne_whenNotEqual_shouldReturnFalse() {
+        try {
+            assertNotEquals(new QuantityMeasurement(1.0, Unit.KILOGRAM),new QuantityMeasurement(1.0, Unit.TONNE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantities1GramAnd1Tonne_whenNotEqual_shouldReturnFalse() {
+        try {
+            assertNotEquals(new QuantityMeasurement(1.0, Unit.GRAM),new QuantityMeasurement(1.0, Unit.TONNE));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
