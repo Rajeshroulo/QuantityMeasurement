@@ -266,25 +266,25 @@ public class QuantityMeasurementTest {
 
     @Test
     public void given2inchAnd2inch_whenAdded_shouldReturn4inches() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(2.0,Unit.INCH),new QuantityMeasurement(2.0,Unit.INCH));
+        double result = quantityMeasurement.add(new QuantityMeasurement(2.0,Unit.INCH),new QuantityMeasurement(2.0,Unit.INCH),Unit.INCH);
         assertEquals(4.0,result,0.0);
     }
 
     @Test
     public void given1FeetAnd2inch_whenAdded_shouldReturn14inches() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),new QuantityMeasurement(2.0,Unit.INCH));
+        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),new QuantityMeasurement(2.0,Unit.INCH),Unit.INCH);
         assertEquals(14.0,result,0.0);
     }
 
     @Test
     public void given1FeetAnd1Feet_whenAdded_shouldReturn24inches() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),new QuantityMeasurement(1.0,Unit.FEET));
+        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),new QuantityMeasurement(1.0,Unit.FEET),Unit.INCH);
         assertEquals(24.0,result,0.0);
     }
 
     @Test
     public void givenInchAndCentimetreValues_whenAdded_shouldReturnResults() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(2.0,Unit.INCH),new QuantityMeasurement(2.5,Unit.CENTIMETER));
+        double result = quantityMeasurement.add(new QuantityMeasurement(2.0,Unit.INCH),new QuantityMeasurement(2.5,Unit.CENTIMETER),Unit.INCH);
         assertEquals(3,result,0.02);
     }
 
@@ -292,16 +292,26 @@ public class QuantityMeasurementTest {
     public void given1InchAnd2Yard_whenAdded_shouldReturn73inches() {
         QuantityMeasurement quantityMeasurement1 = new QuantityMeasurement(1.0,Unit.INCH);
         QuantityMeasurement quantityMeasurement2 = new QuantityMeasurement(2.0,Unit.YARD);
-        double result = quantityMeasurement.add(quantityMeasurement1,quantityMeasurement2);
+        double result = quantityMeasurement.add(quantityMeasurement1,quantityMeasurement2,Unit.INCH);
         assertEquals(73,result,0.0);
     }
 
     @Test
     public void given1FeetAnd2Yard_whenAdded_shouldReturn84inches() {
         double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.FEET),
-                new QuantityMeasurement(2.0,Unit.YARD));
+                new QuantityMeasurement(2.0,Unit.YARD),Unit.INCH);
         assertEquals(84.0,result,0.0);
     }
+
+    @Test
+    public void given1Litre1LitreToAddAndConvertToInch_shouldThrowException() {
+        try {
+            quantityMeasurement.add(new QuantityMeasurement(1.0, Unit.LITRE), new QuantityMeasurement(1.0, Unit.LITRE),Unit.INCH);
+        } catch (QuantityMeasurementException e) {
+            assertEquals(QuantityMeasurementException.ExceptionType.INVALID_CONVERSION,e.type);
+        }
+    }
+
 
     @Test
     public void givenValuesOflitresAndGallon_whenEqual_ShouldReturnEqual() {
@@ -346,7 +356,7 @@ public class QuantityMeasurementTest {
     @Test
     public void given1FeetAnd1Litre_shouldThrowException() {
         try {
-            quantityMeasurement.add(new QuantityMeasurement(1.0, Unit.FEET), new QuantityMeasurement(1.0, Unit.LITRE));
+            quantityMeasurement.add(new QuantityMeasurement(1.0, Unit.FEET), new QuantityMeasurement(1.0, Unit.LITRE),Unit.LITRE);
         } catch (QuantityMeasurementException e) {
             assertEquals(QuantityMeasurementException.ExceptionType.INVALID_ADDITION,e.type);
         }
@@ -354,13 +364,13 @@ public class QuantityMeasurementTest {
 
     @Test
     public void given1000MillilitreAnd1Litre_whenAdded_shouldReturn2Litres() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(1000.0,Unit.MILLILITRE),new QuantityMeasurement(1.0,Unit.LITRE));
+        double result = quantityMeasurement.add(new QuantityMeasurement(1000.0,Unit.MILLILITRE),new QuantityMeasurement(1.0,Unit.LITRE),Unit.LITRE);
         assertEquals(2.0,result,0.0);
     }
 
     @Test
     public void givenGallonAndLitre_whenAdded_shouldReturnCorrectResults() {
-        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.GALLON),new QuantityMeasurement(3.78,Unit.LITRE));
+        double result = quantityMeasurement.add(new QuantityMeasurement(1.0,Unit.GALLON),new QuantityMeasurement(3.78,Unit.LITRE),Unit.LITRE);
         assertEquals(7.56,result,0.0);
     }
 
@@ -416,6 +426,18 @@ public class QuantityMeasurementTest {
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void givenQuantities1000GramAnd1Tonne_whenAdded_shouldReturnResultsInKilogram() {
+        double result = quantityMeasurement.add(new QuantityMeasurement(1000.0,Unit.GRAM),new QuantityMeasurement(1.0,Unit.TONNE),Unit.KILOGRAM);
+        assertEquals(1001,result,0.0);
+    }
+
+    @Test
+    public void givenQuantities1000GramAnd1Kilogram_whenAdded_shouldReturnResultsInKilogram() {
+        double result = quantityMeasurement.add(new QuantityMeasurement(1000.0, Unit.GRAM), new QuantityMeasurement(1.0, Unit.KILOGRAM),Unit.KILOGRAM);
+        assertEquals(2, result, 0.0);
     }
 
 }
