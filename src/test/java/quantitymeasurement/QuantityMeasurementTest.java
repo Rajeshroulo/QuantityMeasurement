@@ -448,4 +448,40 @@ public class QuantityMeasurementTest {
         }
     }
 
+    @Test
+    public void givenQuantities1KelvinAnd1Kelvin_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(1.0, Unit.KELVIN),new QuantityMeasurement(1.0, Unit.KELVIN));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantitiesOfKelvinAndCelcius_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.0, Unit.KELVIN),new QuantityMeasurement(-273.15, Unit.CELCIUS));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenCelciusAndQuantityOfKelvin_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(1.0, Unit.CELCIUS),new QuantityMeasurement(274.15, Unit.KELVIN));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenQuantitiesOfCelciusAndFahrenheit_whenEqual_shouldReturnTrue() {
+        try {
+            assertEquals(new QuantityMeasurement(0.0, Unit.CELCIUS),new QuantityMeasurement(32.0, Unit.FAHRENHEIT));
+        } catch (QuantityMeasurementException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

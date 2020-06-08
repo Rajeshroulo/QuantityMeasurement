@@ -12,7 +12,8 @@ public enum Unit {
     KILOGRAM("WEIGHT",1000.0),
     TONNE("WEIGHT",1000000.0),
     KELVIN("TEMPERATURE",1.0,0.0,0.0),
-    CELCIUS("TEMPERATURE",1.0,273.15,0.0), FAHRENHEIT("TEMPERATURE",5.0/9.0,-32.0,273.15);
+    CELCIUS("TEMPERATURE",1.0,273.15,0.0),
+    FAHRENHEIT("TEMPERATURE",5.0/9.0,-32.0,273.15);
 
     final String measurementType;
     private List<Double> conversionValue;
